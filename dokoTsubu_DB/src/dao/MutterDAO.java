@@ -12,22 +12,23 @@ import model.Mutter;
 
 public class MutterDAO {
 	//データベース接続に使用する情報
-	private final String JDBC_URL ="jdbc:mysql://localhost/sukkirishop";
+	private final String JDBC_URL ="jdbc:mysql://localhost/tsubuyaki";
 	private final String DB_USER = "root";
-	private final String DB_PASS = "1234";
+	private final String DB_PASS = "hogehoge";
 
 	public List<Mutter> findAll(){
 		List<Mutter> mutterList = new ArrayList<>();
 		//データベース接続
 		try(Connection conn = DriverManager.getConnection(JDBC_URL,DB_USER,DB_PASS)) {
 			//SELECT文の準備
-			String sql = "SELECT USER_ID,NAME,TEXT FROM MUTTER ORDER BY USER_ID DESC";
+			String sql = "SELECT MUTTER_ID,NAME,TEXT FROM MUTTER ORDER BY MUTTER_ID DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//SELECT文の実行
 			ResultSet rs = pStmt.executeQuery();
 			//SELECT文の結果をArrayListに格納
+			System.out.println("findall");
 			while(rs.next()) {
-				int id = rs.getInt("USER_ID");
+				int id = rs.getInt("MUTTER_ID");
 				String userName = rs.getString("NAME");
 				String text = rs.getString("TEXT");
 				Mutter mutter = new Mutter(id,userName,text);
@@ -36,6 +37,7 @@ public class MutterDAO {
 			}
 		} catch (SQLException e) {
 			// TODO: handle exception
+			System.out.println("mutterDAO:findallでエラー");
 			e.printStackTrace();
 			return null;
 		}
@@ -45,6 +47,7 @@ public class MutterDAO {
 		//データベースに接続
 		try (Connection conn = DriverManager.getConnection(JDBC_URL,DB_USER,DB_PASS)){
 			//INSERT文の準備（IDは自動連番なので指定しなくてよい）
+			System.out.println("create");
 			String sql = "INSERT INTO MUTTER(NAME,TEXT) VALUES(?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//INSERT文中の？に使用する値を設定しSQLを完成
@@ -67,13 +70,13 @@ public class MutterDAO {
 
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)){
 			//部分一致検索機能
-			String sql = "SELECT USER_ID,NAME,TEXT FROM MUTTER WHERE TEXT LIKE ?";
+			String sql = "SELECT MUTTER_ID,NAME,TEXT FROM MUTTER WHERE TEXT LIKE ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			//selectにフロントから入る値をセット
 			pStmt.setString(1, "%" + mutter.getText() + "%");
 			ResultSet rs = pStmt.executeQuery();
 			while(rs.next()) {
-				int sortId = rs.getInt("USER_ID");
+				int sortId = rs.getInt("MUTTER_ID");
 				String sortName = rs.getString("NAME");
 				String sortText = rs.getString("TEXT");
 				Mutter sortmutter = new Mutter(sortId,sortName, sortText);
@@ -90,7 +93,7 @@ public class MutterDAO {
 	public boolean deleteMutter(int id) {
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)){
 			//ID一致で削除
-			String sql = "DELETE FROM MUTTER WHERE USER_ID = ?";
+			String sql = "DELETE FROM MUTTER WHERE MUTTER_ID = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, id);

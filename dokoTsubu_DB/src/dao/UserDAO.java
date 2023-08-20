@@ -10,9 +10,9 @@ import model.User;
 
 public class UserDAO {
 	//データベース接続に使用する情報
-	private final String JDBC_URL ="jdbc:mysql://localhost/sukkirishop";
+	private final String JDBC_URL ="jdbc:mysql://localhost/tsubuyaki";
 	private final String DB_USER = "root";
-	private final String DB_PASS = "1234";
+	private final String DB_PASS = "hogehoge";
 
 
 	public boolean findUser(User user) {
@@ -34,6 +34,7 @@ public class UserDAO {
 
 		}catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
+			System.out.println("findUser: false");
 			e.printStackTrace();
 			return false;
 		}
@@ -53,6 +54,7 @@ public class UserDAO {
 				pStmt.executeUpdate();
 				return true;
 			}else {
+				System.out.println("userDAO:false");
 				return false;
 			}
 

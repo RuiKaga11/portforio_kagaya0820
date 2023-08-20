@@ -52,6 +52,8 @@ public class Account extends HttpServlet {
 		User user = new User(name,pass);
 		user.setName(name);
 		user.setPass(pass);
+		System.out.println(user.getName());
+		System.out.println(user.getPass());
 
 		//パスワードの再入力の値チェック
 		if(pass.equals(pass2)){

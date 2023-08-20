@@ -85,6 +85,8 @@ public class Main extends HttpServlet {
 
 			//つぶやきをつぶやきリストに追加
 			Mutter mutter = new Mutter(loginUser.getName(),text);
+			System.out.println(mutter.getUserName());
+			System.out.println(mutter.getText());
 			PostMutterLogic postMutterLogic = new PostMutterLogic();
 			postMutterLogic.execute(mutter);//executeはユーザー自作クラス
 
