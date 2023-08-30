@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Mutter;
+import model.User;
 
 public class MutterDAO {
 	//データベース接続に使用する情報
@@ -111,5 +112,32 @@ public class MutterDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	public List<Mutter> sortMutter(User user){
+		System.out.println("sortMutterメソッドに入る");
+		List<Mutter> myMutterList = new ArrayList<>();
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)){
+			String sql = "SELECT TEXT FROM MUTTER WHERE NAME = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			String mutterName = user.getName();
+			System.out.println(mutterName);
+			pStmt.setString(1, mutterName);
+			ResultSet rs = pStmt.executeQuery();
+			while(rs.next()) {
+				String text = rs.getString("TEXT");
+				Mutter myMutter = new Mutter(text);
+				myMutterList.add(myMutter);
+			}
+			if(!(rs.next())) {
+				System.out.println("rsが空");
+				myMutterList = new ArrayList<>();
+				return myMutterList;
+			}
+			} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return myMutterList;
+
 	}
 }

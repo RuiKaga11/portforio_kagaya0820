@@ -13,6 +13,9 @@ public class User implements Serializable{
 		this.name = name;
 		this.pass = pass;
 	}
+	public User(String name) {
+		this.name = name;
+	}
 	//getterだけsetterも入れてみる
 	public String getName() {
 		return name;

@@ -74,7 +74,7 @@ String deleteFalseMsg2 = (String) request.getAttribute("deleteFalseMsg2");
 </p>
 <% };%>
 <% }; %>
-
+<p><a href="/dokoTsubu_DB/Mypage">マイページへ</a></p>
 <p><a href="/dokoTsubu_DB/Main">更新</a></p>
 <form action="/dokoTsubu_DB/Main" method="post">
 <input type="text" name="text">

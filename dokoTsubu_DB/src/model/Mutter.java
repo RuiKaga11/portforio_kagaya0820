@@ -9,6 +9,9 @@ public class Mutter implements Serializable{
 	private String text;
 	//コンストラクタ
 	public Mutter() {}
+	public Mutter(String text) {
+		this.text = text;
+	}
 	public Mutter(String userName, String text) {
 		this.userName = userName;
 		this.text = text;
