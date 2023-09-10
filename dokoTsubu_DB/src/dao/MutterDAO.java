@@ -124,15 +124,16 @@ public class MutterDAO {
 			pStmt.setString(1, mutterName);
 			ResultSet rs = pStmt.executeQuery();
 			while(rs.next()) {
+				System.out.println("whileに入っている");
 				String text = rs.getString("TEXT");
 				Mutter myMutter = new Mutter(text);
 				myMutterList.add(myMutter);
 			}
-			if(!(rs.next())) {
-				System.out.println("rsが空");
-				myMutterList = new ArrayList<>();
-				return myMutterList;
-			}
+//			if(!(rs.next())) {
+//				System.out.println("rsが空");
+//				myMutterList = new ArrayList<>();
+//				return myMutterList;
+//			}
 			} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

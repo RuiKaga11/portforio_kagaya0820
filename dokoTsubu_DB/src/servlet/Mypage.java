@@ -49,7 +49,7 @@ public class Mypage extends HttpServlet {
 		if(myMutterList.isEmpty()) {
 			System.out.println("ifに入っている=リストが空");
 			myMutterList = new ArrayList<>();
-			request.setAttribute("mymutterList", myMutterList);
+//			request.setAttribute("mymutterList", myMutterList);
 			request.setAttribute("recomMsg", "つぶやきがありません。つぶやいてみよう！");
 //			request.setAttribute("mymutterList", myMutterList);
 		}else {
